@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WalletPay</title>
+    <style>
+        body {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(21, 101, 192, 0.1);
+            width: 100%;
+            max-width: 300px;
+        }
+
+        h1 {
+            color: #1565c0;
+            text-align: center;
+            margin: 0 0 25px;
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #1565c0;
+            border-radius: 25px;
+            color: #1565c0;
+            font-size: 0.9em;
+            background: white;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border: 2px solid #1e88e5;
+            box-shadow: 0 0 6px rgba(21, 101, 192, 0.3);
+        }
+
+        input::placeholder {
+            color: #1565c0;
+            opacity: 0.6;
+        }
+
+        button {
+            background: linear-gradient(135deg, #1565c0, #1e88e5);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            width: 100%;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(21, 101, 192, 0.2);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(21, 101, 192, 0.3);
+        }
+
+        #error-message, #signup-error {
+            color: #1565c0;
+            text-align: center;
+            margin-top: 12px;
+            font-size: 0.85em;
+            display: none;
+            padding: 5px 10px;
+            border-radius: 15px;
+            background: rgba(21, 101, 192, 0.05);
+        }
+
+        #signup-form {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #signup-btn {
+            background: linear-gradient(135deg, #1e88e5, #1565c0);
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>WalletPay</h1>
+        <form id="loginForm">
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Sign In</button>
+            <div id="error-message">Invalid credentials</div>
+        </form>
+        
+        <button id="signup-btn">Sign Up</button>
+        
+        <form id="signup-form">
+            <div class="input-group">
+                <input type="email" id="signup-email" placeholder="Email" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="signup-password" placeholder="Password" required>
+            </div>
+            <button type="submit">Sign Up</button>
+            <div id="signup-error">Not available in your region</div>
+        </form>
+    </div>
+
+    <script>
+        // Login Form Handling
+        const loginForm = document.getElementById('loginForm');
+        const errorMessage = document.getElementById('error-message');
+        const signupBtn = document.getElementById('signup-btn');
+        const signupForm = document.getElementById('signup-form');
+        const signupError = document.getElementById('signup-error');
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            const correctUsername = 'pblumn';
+            const correctPassword = 'rothre';
+            
+            if (username.toLowerCase() === correctUsername.toLowerCase() && 
+                password.toLowerCase() === correctPassword.toLowerCase()) {
+                errorMessage.style.display = 'none';
+                window.location.href = 'https://walletpay-io.github.io/Pay/';
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        });
+
+        // Signup Button Handling
+        signupBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            loginForm.style.display = 'none'; // Hide the login form
+            signupBtn.style.display = 'none'; // Hide the signup button
+            signupForm.style.display = 'block'; // Show the signup form
+        });
+
+        // Signup Form Handling
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            signupError.style.display = 'block';
+        });
+    </script>
+</body>
+  </html>
